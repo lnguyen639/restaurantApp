@@ -1,0 +1,32 @@
+{% include "restaurantProj/header.html" %}
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top:100px;margin-left:250px">
+        <div class="w3-white w3-col w3-card w3-display-container" style="min-height:450px;opacity:0.5;margin-right:10px;margin-top:40px">
+            <h1 class="w3-center">Table {{ table }}</h1>
+            <ul class="w3-ul w3-center">
+                {% for orderwmenuitem in object_list%}
+                <ul class="w3-ul w3-center">
+                    {{ orderwmenuitem.menuitem.name }} | {{ orderwmenuitem.menuitem.price }}
+                    <a class="fa fa-minus-square-o" style="text-decoration:none" href="/menu/delete/{{ orderwmenuitem.menuitem.id }}?next={{ request.path|urlencode }}"></a>
+                </ul>
+                {% if forloop.last %}
+                <ul class="w3-ul">---</ul>
+                <ul class="w3-ul w3-center">
+                    Tax (8%) {{ tax }}
+                    <br>
+                    Total Price {{ sum }}
+                </ul>
+                {% endif %}
+                {% empty %}
+                <ul class="w3-ul w3-center">
+                    No Menu Item for Table yet
+                </ul>
+                {% endfor %}
+            </ul>
+            <a class="w3-button w3-display-bottommiddle w3-black" href="/orderwmenuitem/add?next={{ request.path|urlencode }}">Add Menu Item to Table</a>
+        </div>
+</div>
+<!-- End page content -->
+
+{% include "restaurantProj/footer.html" %}

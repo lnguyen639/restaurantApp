@@ -1,0 +1,8 @@
+li a {
+    color: green;
+}
+
+body {
+    background: white url("images/linhsushi2.png") no-repeat;
+    background-size: cover;
+}

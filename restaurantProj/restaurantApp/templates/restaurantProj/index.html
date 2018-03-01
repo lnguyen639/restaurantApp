@@ -1,0 +1,46 @@
+{% include "restaurantProj/header.html" %}
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top:100px;margin-left:250px">
+    <div class="w3-half w3-left ">
+        <div class="w3-white w3-col w3-button w3-card w3-display-container" style="min-height:400px;opacity:0.5;margin-top:40px;margin-right:10px;overflow:scroll">
+            <h1 class="w3-center">Menu Item</h1>
+            <ul class="w3-ul">
+                {% for menuitem in menuitem %}
+                <ul class="w3-ul w3-center">
+                    {{ menuitem.id}}. {{ menuitem.name }} ({{ menuitem.type }}) | {{ menuitem.price }}
+                    <a class="fa fa-minus-square-o" style="text-decoration:none" href="/menu/delete/{{ menuitem.id }}?next={{ request.path|urlencode }}"></a>
+                </ul>
+                {% empty %}
+                <ul class="w3-ul w3-center">
+                    No Menu Item yet
+                </ul>
+                {% endfor %}
+            </ul>
+            <a class="w3-button w3-display-bottommiddle w3-black" href="/menu/add">Add Menu Item</a>
+        </div>
+    </div>
+    <div class="w3-half w3-right ">
+        <div class="w3-white w3-col w3-button w3-card w3-display-container" style="min-height:400px;opacity:0.5;margin-top:40px;margin-right:10px">
+            <h1>Current Table</h1>
+            <ul class="w3-ul">
+                {% for order in order %}
+                <ul class="w3-ul w3-center">
+                    <a style="text-decoration:none" href="/orderview/{{ order.id }}">
+                        Table {{ order.table }} | {{ order.menuitem.name }}
+                    </a>
+                    <a class="fa fa-minus-square-o" style="text-decoration:none" href="/order/delete/{{ order.id }}"></a>
+                </ul>
+                {% empty %}
+                <ul class="w3-ul w3-center">
+                No Table yet
+                </ul>
+                {% endfor %}
+            </ul>
+            <a class="w3-button w3-display-bottommiddle w3-black" href="/order/add">Add Table</a>
+        </div>
+    </div>
+</div>
+<!-- End page content -->
+
+{% include "restaurantProj/footer.html" %}
